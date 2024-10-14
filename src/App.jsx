@@ -4,7 +4,7 @@ import {
 	deleteContact,
 	selectContacts,
 } from "./redux/contactsSlice";
-import { changeFilter, selectNameFilter } from "./redux/filtersSlice";
+import { selectNameFilter } from "./redux/filtersSlice";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
 import SearchBox from "./components/SearchBox/SearchBox";
@@ -24,10 +24,6 @@ const App = () => {
 		dispatch(deleteContact(contactId));
 	};
 
-	const handleFilterChange = (e) => {
-		dispatch(changeFilter(e.target.value));
-	};
-
 	const filteredContacts = contacts.filter((contact) =>
 		contact.name.toLowerCase().includes(filter.toLowerCase())
 	);
@@ -36,7 +32,7 @@ const App = () => {
 		<div className={s.container}>
 			<h1 className={s.headerTitle}>Phonebook</h1>
 			<ContactForm addContact={handleAddContact} />
-			<SearchBox filter={filter} onFilterChange={handleFilterChange} />
+			<SearchBox />
 			<ContactList
 				onDeleteContact={handleDeleteContact}
 				contacts={filteredContacts}
